@@ -1,0 +1,33 @@
+@startuml
+[*] --> Init
+Init --> Calibration : Init-Success
+Init --> Calibration : Ground
+Calibration --> Operational : Transition
+Operational --> ActiveMission : Transition
+ActiveMission --> Operational : Transition
+state Init {
+    Init: - CDH turn on
+    Init: - Deploy antenna
+    Init: - MAG & EST
+}
+state Calibration {
+    Calibration : - Calibrate the insturments via Ground
+    Calibration : - Connect to Ground
+}
+state Operational {
+    Operational: - Done Init
+    Operational: - Not Doing Science
+    Operational: - Not connected to Ground
+}
+state ActiveMission {
+    ActiveMission: - All the science happens
+    ActiveMission: - Collect & store data from payload
+}
+state Recory {
+    Recory: - CDH has encountered unknown or unexpected behaviour
+}
+state LowPowerMode {
+    LowPowerMode: - Based on power in the EPS Battery
+    LowPowerMode: - Avoid using more power than given
+}
+@enduml
